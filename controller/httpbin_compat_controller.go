@@ -53,7 +53,19 @@ func (controller *APIController) GetUUID(ctx *gin.Context) {
 // @Success			200 {object} response.HTTPBinRequestResponse
 // @Failure      	500 {object} response.HTTPError
 // @Router			/anything [get]
+// @Router			/anything [post]
+// @Router			/anything [put]
+// @Router			/anything [patch]
+// @Router			/anything [delete]
+// @Router			/anything [head]
+// @Router			/anything [options]
 // @Router			/anything/{anything} [get]
+// @Router			/anything/{anything} [post]
+// @Router			/anything/{anything} [put]
+// @Router			/anything/{anything} [patch]
+// @Router			/anything/{anything} [delete]
+// @Router			/anything/{anything} [head]
+// @Router			/anything/{anything} [options]
 func (controller *APIController) Anything(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, controller.buildHTTPBinRequestResponse(ctx))
 }
@@ -414,6 +426,12 @@ func (controller *APIController) GetStream(ctx *gin.Context) {
 // @Success			200 {object} response.HTTPBinRequestResponse
 // @Failure      	400 {object} response.HTTPError
 // @Router			/delay/{n} [get]
+// @Router			/delay/{n} [post]
+// @Router			/delay/{n} [put]
+// @Router			/delay/{n} [patch]
+// @Router			/delay/{n} [delete]
+// @Router			/delay/{n} [head]
+// @Router			/delay/{n} [options]
 func (controller *APIController) GetDelay(ctx *gin.Context) {
 	delay, ok := parsePathInt(ctx, "n")
 	if !ok {
