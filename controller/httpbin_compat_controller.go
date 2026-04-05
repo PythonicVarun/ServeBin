@@ -438,6 +438,10 @@ func (controller *APIController) GetDrip(ctx *gin.Context) {
 		helper.NewError(ctx, http.StatusBadRequest, err)
 		return
 	}
+	if numBytes > maxGeneratedBytes {
+		helper.NewError(ctx, http.StatusBadRequest, fmt.Errorf("numbytes must be less than or equal to %d", maxGeneratedBytes))
+		return
+	}
 
 	durationSeconds, err := helper.ParsePositiveFloat(ctx.Query("duration"), 2)
 	if err != nil {
