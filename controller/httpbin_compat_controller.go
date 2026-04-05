@@ -726,16 +726,15 @@ func (controller *APIController) GetLinks(ctx *gin.Context) {
 	}
 	total = helper.ClampInt(total, 0, 256)
 
+	offset := 0
 	offsetValue := ctx.Param("offset")
-	if offsetValue == "" {
-		controller.writeRedirect(ctx, fmt.Sprintf("/links/%d/0", total), http.StatusFound)
-		return
-	}
-
-	offset, err := strconv.Atoi(offsetValue)
-	if err != nil {
-		helper.NewError(ctx, http.StatusBadRequest, err)
-		return
+	if offsetValue != "" {
+		var err error
+		offset, err = strconv.Atoi(offsetValue)
+		if err != nil {
+			helper.NewError(ctx, http.StatusBadRequest, err)
+			return
+		}
 	}
 	if total == 0 || offset < 0 || offset >= total {
 		ctx.Status(http.StatusNotFound)
