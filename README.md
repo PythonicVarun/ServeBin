@@ -160,7 +160,7 @@ Notes:
 | Route                                            | What it does                                                            |
 | ------------------------------------------------ | ----------------------------------------------------------------------- |
 | `ANY /anything` and `ANY /anything/*anything`    | Echoes request data in `httpbin`-style format                           |
-| `GET /base64/:value`                             | Base64-decodes a path value                                             |
+| `GET /base64/*value`                             | Base64-decodes a path value                                             |
 | `GET /encoding/utf8`                             | Returns a UTF-8 sample page                                             |
 | `GET /response-headers`                          | Copies query parameters into response headers and echoes them as JSON   |
 | `GET /redirect/:n`                               | Performs chained redirects                                              |
