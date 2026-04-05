@@ -607,6 +607,10 @@ func (controller *APIController) GetCacheFor(ctx *gin.Context) {
 	if !ok {
 		return
 	}
+	if maxAge < 0 {
+		helper.NewError(ctx, http.StatusBadRequest, fmt.Errorf("n must be non-negative"))
+		return
+	}
 
 	ctx.Header("Cache-Control", fmt.Sprintf("public, max-age=%d", maxAge))
 	ctx.JSON(http.StatusOK, controller.buildHTTPBinRequestResponse(ctx))
