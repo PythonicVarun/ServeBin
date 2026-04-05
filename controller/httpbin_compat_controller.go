@@ -460,6 +460,10 @@ func (controller *APIController) GetDrip(ctx *gin.Context) {
 		helper.NewError(ctx, http.StatusBadRequest, err)
 		return
 	}
+	if statusCode < http.StatusContinue || statusCode > http.StatusNetworkAuthenticationRequired {
+		helper.NewError(ctx, http.StatusBadRequest, fmt.Errorf("code must be between %d and %d", http.StatusContinue, http.StatusNetworkAuthenticationRequired))
+		return
+	}
 
 	if initialDelay > 0 {
 		time.Sleep(time.Duration(initialDelay * float64(time.Second)))
