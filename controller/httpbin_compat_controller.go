@@ -15,13 +15,14 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"hash"
 	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 const maxGeneratedBytes = 102400
@@ -65,7 +66,7 @@ func (controller *APIController) Anything(ctx *gin.Context) {
 // @Failure      	400 {object} response.HTTPError
 // @Router			/base64/{value} [get]
 func (controller *APIController) GetBase64(ctx *gin.Context) {
-	value := ctx.Param("value")
+	value := strings.TrimPrefix(ctx.Param("value"), "/")
 	decoded, err := decodeBase64Value(value)
 	if err != nil {
 		helper.NewError(ctx, http.StatusBadRequest, err)

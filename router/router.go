@@ -65,7 +65,7 @@ func NewRouter(apiController *controller.APIController) *gin.Engine {
 
 	router.Any("/anything", apiController.Anything)
 	router.Any("/anything/*anything", apiController.Anything)
-	router.GET("/base64/:value", apiController.GetBase64)
+	router.GET("/base64/*value", apiController.GetBase64)
 	router.GET("/encoding/utf8", apiController.GetUTF8)
 	router.GET("/xml", apiController.GetXML)
 	router.GET("/html", apiController.GetHTML)
